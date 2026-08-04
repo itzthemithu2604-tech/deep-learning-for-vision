@@ -1,0 +1,79 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPj6mGChjnExMXXF4M+Iu3k",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/itzthemithu2604-tech/deep-learning-for-vision/blob/main/mithun.ipynb%202\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "beYM4Rp6_Ath",
+        "outputId": "743d3842-4db8-4511-b9dc-5103ecca880d"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Predicted Output after training:\n",
+            "[[0.5]\n",
+            " [0.5]\n",
+            " [0.5]\n",
+            " [0.5]]\n"
+          ]
+        }
+      ],
+      "source": [
+        "import numpy as np\n",
+        "def sigmoid(x):\n",
+        "    return 1 / (1 + np.exp(-x))\n",
+        "\n",
+        "def sigmoid_derivative(x):\n",
+        "    return x * (1 - x)\n",
+        "\n",
+        "X = np.array([[0,0], [0,1], [1,0], [1,1]])\n",
+        "Y = np.array([[0], [1], [1], [0]])\n",
+        "\n",
+        "# Implementation of Simple Neural Network Ex 2 Date:\n",
+        "np.random.seed(1)\n",
+        "weights = 2 * np.random.random((2, 1)) - 1\n",
+        "\n",
+        "for epoch in range(10000):\n",
+        "    input_layer = X\n",
+        "    output = sigmoid(np.dot(input_layer, weights))\n",
+        "    error = Y - output\n",
+        "    adjustments = error * sigmoid_derivative(output)\n",
+        "    weights += np.dot(input_layer.T, adjustments)\n",
+        "\n",
+        "print(\"Predicted Output after training:\")\n",
+        "print(output)"
+      ]
+    }
+  ]
+}
